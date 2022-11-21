@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Article} from '../Article';
+
 
 @Component({
   selector: 'app-article',
@@ -7,8 +7,8 @@ import {Article} from '../Article';
   styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit{
-  article: Article = {};
-  articles: Article[] = [
+
+  articles = [
     {
       title: 'The Evolution of Async JavaScript: From Callbacks, to Promises, to Async/Await',
       url: 'https://medium.freecodecamp.org/the-evolution-of-async-javascript-from-callbacks-to-promises-to-async-await-e73b047f2f40'
@@ -34,7 +34,19 @@ export class ArticleComponent implements OnInit{
 
   ngOnInit(): void {
   }
-  addNewArticle() {
-    this.articles.push(this.article);
+  // @ts-ignore
+  private news: { title: string; url: string };
+
+  addArticle() {
+    this.news = {
+      title: '',
+      url: ''
+    }
+    // @ts-ignore
+    this.news.title = document.getElementById('article-title')["value"]
+    // @ts-ignore
+    this.news.url = document.getElementById('article-url')['value']
+    this.articles.push(this.news)
   }
+
 }
